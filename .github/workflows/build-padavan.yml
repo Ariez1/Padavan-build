@@ -116,7 +116,12 @@ jobs:
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
         #sed -i '/自定义项/d' .config
-        #echo "自定义项=y" >> .config
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config #删除配置项VPN服务器
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config #删除配置项VPN客户端
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config #删除配置项VPN CMD
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=y" >> .config #VPN服务端
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=y" >> .config #VPN客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=y" >> .config #VPN CMD
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
